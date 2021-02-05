@@ -9,18 +9,31 @@ body.style.zIndex = 10;
 // // body.style.display = "flex";
 // // body.style.flexWrap = "wrap";
 // console.log(divCanvas);
+
 body.addEventListener("mousemove", draw);
 body.addEventListener("click", clear);
-body.addEventListener("scroll", scrolling);
-// document.getElementById("canvas").addEventListener("onmouseup", clickBody);
-function scrolling() {
+
+body.onscroll = function scrolling(e) {
+  // let y = e.clientY;
+  // console.log("befo", y);
   let scrollYDistance = window.scrollY;
   console.log("scroll", scrollYDistance);
+  let elements = document.getElementsByClassName("frame");
+  let elementsArray = [...elements];
+  // console.log("elementsarray", elementsArray);
+  elementsArray.forEach(element => {
+    console.log(element);
+
+    element.style.transform = `translate(0px,${scrollYDistance}px)`;
+    // console.log(y);
+  });
 
   // if (window.scrollY) {
   //   window.scroll(0, 0); // reset the scroll position to the top left of the document.
   // }
-}
+};
+// body.addEventListener("scroll", scrolling);
+// document.getElementById("canvas").addEventListener("onmouseup", clickBody);
 
 function draw(e) {
   let x = e.clientX;
@@ -29,8 +42,8 @@ function draw(e) {
   frame.setAttribute("class", "frame");
   document.body.appendChild(frame);
   let elements = document.getElementsByClassName("frame");
-  console.log("elements-array", elements);
-  console.log("elements lenght", elements.length);
+  // console.log("elements-array", elements);
+  // console.log("elements lenght", elements.length);
 
   let randomNumber = Math.floor(Math.random() * 2);
 
