@@ -44,8 +44,12 @@ function draw(e) {
         let randomWidth = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
         elements[elements.length - 1].style.width = `${randomWidth}px`;
         elements[elements.length - 1].style.height = `${randomHeight}px`;
-        elements[elements.length - 1].style.left = `${x - randomWidth}px`;
-        elements[elements.length - 1].style.top = `${y - randomHeight}px`;
+        elements[elements.length - 1].style.left = `${x -
+          randomWidth / 2 -
+          30}px`;
+        elements[elements.length - 1].style.top = `${y -
+          randomHeight / 2 -
+          30}px`;
         elements[elements.length - 1].style.margin = "1px";
         elements[elements.length - 1].style.borderRadius = "200px";
         elements[elements.length - 1].style.boxShadow =
@@ -55,8 +59,12 @@ function draw(e) {
         elements[i].style.position = "absolute";
         let randomHeight = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
         let randomWidth = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
-        elements[elements.length - i].style.left = `${x - randomWidth}px`;
-        elements[elements.length - i].style.top = `${y - randomHeight}px`;
+        elements[elements.length - i].style.left = `${x -
+          randomWidth / 2 -
+          30}px`;
+        elements[elements.length - i].style.top = `${y -
+          randomHeight / 2 -
+          30}px`;
         elements[elements.length - i].style.backgroundColor = "black";
         elements[elements.length - i].style.width = `${randomWidth}px`;
         elements[elements.length - i].style.height = `${randomHeight}px`;
@@ -79,8 +87,12 @@ function draw(e) {
           let randomWidth = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
           elements[elements.length - 1].style.width = `${randomWidth}px`;
           elements[elements.length - 1].style.height = `${randomHeight}px`;
-          elements[elements.length - 1].style.left = `${x - randomWidth}px`;
-          elements[elements.length - 1].style.top = `${y - randomHeight}px`;
+          elements[elements.length - 1].style.left = `${x -
+            randomWidth / 2 -
+            30}px`;
+          elements[elements.length - 1].style.top = `${y -
+            randomHeight / 2 -
+            30}px`;
           elements[elements.length - 1].style.margin = "1px";
           elements[elements.length - 1].style.borderRadius = "200px";
           elements[elements.length - 1].style.boxShadow =
@@ -90,8 +102,12 @@ function draw(e) {
           elements[i].style.position = "absolute";
           let randomHeight = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
           let randomWidth = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
-          elements[elements.length - i].style.left = `${x - randomWidth}px`;
-          elements[elements.length - i].style.top = `${y - randomHeight}px`;
+          elements[elements.length - i].style.left = `${x -
+            randomWidth / 2 -
+            30}px`;
+          elements[elements.length - i].style.top = `${y -
+            randomHeight / 2 -
+            30}px`;
           elements[elements.length - i].style.backgroundColor = "white";
           elements[elements.length - i].style.width = `${randomWidth}px`;
           elements[elements.length - i].style.height = `${randomHeight}px`;
