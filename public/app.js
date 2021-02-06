@@ -2,9 +2,9 @@ let body = document.querySelector("body");
 // body.style.backgroundColor = "black";
 // let divCanvas = document.getElementById("canvas");
 // body.style.backgroundColor = "rgba(255,0,0,0.5)"; //
-body.style.height = "900px";
+// body.style.height = "900px";
 // divCanvas.style.width = "width";
-body.style.zIndex = 10;
+// body.style.zIndex = 10;
 // divCanvas.style.top = "0";
 // // body.style.display = "flex";
 // // body.style.flexWrap = "wrap";
@@ -12,21 +12,26 @@ body.style.zIndex = 10;
 
 body.addEventListener("mousemove", draw);
 body.addEventListener("click", clear);
+let hasBeenScrolled = false;
+body.onscroll = function scrolling() {
+  let scrollYDistance = window.scrollY;
 
-body.onscroll = function scrolling(e) {
   // let y = e.clientY;
   // console.log("befo", y);
-  let scrollYDistance = window.scrollY;
   console.log("scroll", scrollYDistance);
   let elements = document.getElementsByClassName("frame");
   let elementsArray = [...elements];
   // console.log("elementsarray", elementsArray);
   elementsArray.forEach(element => {
-    console.log(element);
+    // console.log(element);
 
     element.style.transform = `translate(0px,${scrollYDistance}px)`;
     // console.log(y);
   });
+  console.log("hasbeenscrolled1", hasBeenScrolled);
+
+  return (hasBeenScrolled = true);
+  console.log("hasbeenscrolled", hasBeenScrolled);
 
   // if (window.scrollY) {
   //   window.scroll(0, 0); // reset the scroll position to the top left of the document.
@@ -36,6 +41,7 @@ body.onscroll = function scrolling(e) {
 // document.getElementById("canvas").addEventListener("onmouseup", clickBody);
 
 function draw(e) {
+  let scrollYDistance = window.scrollY;
   let x = e.clientX;
   let y = e.clientY;
   let frame = document.createElement("div");
@@ -46,56 +52,107 @@ function draw(e) {
   // console.log("elements lenght", elements.length);
 
   let randomNumber = Math.floor(Math.random() * 2);
+  console.log("hasbeenscrolled2", hasBeenScrolled);
 
-  if (randomNumber === 0) {
-    for (let i = 0; i < elements.length; i++) {
-      if (i === 0) {
-        elements[elements.length - 1].style.position = "absolute";
-
-        elements[elements.length - 1].style.backgroundColor = "black";
-        let randomHeight = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
-        let randomWidth = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
-        elements[elements.length - 1].style.width = `${randomWidth}px`;
-        elements[elements.length - 1].style.height = `${randomHeight}px`;
-        elements[elements.length - 1].style.left = `${x -
-          randomWidth / 2 -
-          30}px`;
-        elements[elements.length - 1].style.top = `${y -
-          randomHeight / 2 -
-          30}px`;
-        elements[elements.length - 1].style.margin = "1px";
-        elements[elements.length - 1].style.borderRadius = "200px";
-        elements[elements.length - 1].style.boxShadow =
-          "0px 0px 5px 1px #FFFFFF";
-      }
-      if (i > 0) {
-        elements[i].style.position = "absolute";
-        let randomHeight = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
-        let randomWidth = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
-        elements[elements.length - i].style.left = `${x -
-          randomWidth / 2 -
-          30}px`;
-        elements[elements.length - i].style.top = `${y -
-          randomHeight / 2 -
-          30}px`;
-        elements[elements.length - i].style.backgroundColor = "black";
-        elements[elements.length - i].style.width = `${randomWidth}px`;
-        elements[elements.length - i].style.height = `${randomHeight}px`;
-        elements[elements.length - i].style.margin = "1px";
-        elements[elements.length - i].style.borderRadius = "200px";
-        elements[elements.length - i].style.boxShadow =
-          "0px 0px 5px 1px #FFFFFF";
-        return;
-      }
-    }
-  }
-  if (randomNumber === 1) {
-    {
+  if (hasBeenScrolled === true) {
+    if (randomNumber === 0) {
       for (let i = 0; i < elements.length; i++) {
         if (i === 0) {
           elements[elements.length - 1].style.position = "absolute";
 
-          elements[elements.length - 1].style.backgroundColor = "white";
+          elements[elements.length - 1].style.backgroundColor = "black";
+          let randomHeight = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
+          let randomWidth = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
+          elements[elements.length - 1].style.width = `${randomWidth}px`;
+          elements[elements.length - 1].style.height = `${randomHeight}px`;
+          elements[elements.length - 1].style.left = `${x -
+            randomWidth / 2 -
+            30}px`;
+          elements[elements.length - 1].style.top = `${y -
+            randomHeight / 2 -
+            30 +
+            scrollYDistance}px`;
+          elements[elements.length - 1].style.margin = "1px";
+          elements[elements.length - 1].style.borderRadius = "200px";
+          elements[elements.length - 1].style.boxShadow =
+            "0px 0px 5px 1px #FFFFFF";
+        }
+        if (i > 0) {
+          elements[i].style.position = "absolute";
+          let randomHeight = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
+          let randomWidth = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
+          elements[elements.length - i].style.left = `${x -
+            randomWidth / 2 -
+            30}px`;
+          elements[elements.length - i].style.top = `${y -
+            randomHeight / 2 -
+            30 +
+            scrollYDistance}px`;
+          elements[elements.length - i].style.backgroundColor = "black";
+          elements[elements.length - i].style.width = `${randomWidth}px`;
+          elements[elements.length - i].style.height = `${randomHeight}px`;
+          elements[elements.length - i].style.margin = "1px";
+          elements[elements.length - i].style.borderRadius = "200px";
+          elements[elements.length - i].style.boxShadow =
+            "0px 0px 5px 1px #FFFFFF";
+          console.log("hasbeenscrolled3", hasBeenScrolled);
+        }
+      }
+      return (hasBeenScrolled = false);
+    }
+    if (randomNumber === 1) {
+      {
+        for (let i = 0; i < elements.length; i++) {
+          if (i === 0) {
+            elements[elements.length - 1].style.position = "absolute";
+
+            elements[elements.length - 1].style.backgroundColor = "white";
+            let randomHeight = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
+            let randomWidth = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
+            elements[elements.length - 1].style.width = `${randomWidth}px`;
+            elements[elements.length - 1].style.height = `${randomHeight}px`;
+            elements[elements.length - 1].style.left = `${x -
+              randomWidth / 2 -
+              30}px`;
+            elements[elements.length - 1].style.top = `${y -
+              randomHeight / 2 -
+              30 +
+              scrollYDistance}px`;
+            elements[elements.length - 1].style.margin = "1px";
+            elements[elements.length - 1].style.borderRadius = "200px";
+            elements[elements.length - 1].style.boxShadow =
+              "0px 0px 5px 1px #FFFFFF";
+          }
+          if (i > 0) {
+            elements[i].style.position = "absolute";
+            let randomHeight = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
+            let randomWidth = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
+            elements[elements.length - i].style.left = `${x -
+              randomWidth / 2 -
+              30}px`;
+            elements[elements.length - i].style.top = `${y -
+              randomHeight / 2 -
+              30 +
+              scrollYDistance}px`;
+            elements[elements.length - i].style.backgroundColor = "white";
+            elements[elements.length - i].style.width = `${randomWidth}px`;
+            elements[elements.length - i].style.height = `${randomHeight}px`;
+            elements[elements.length - i].style.margin = "1px";
+            elements[elements.length - i].style.borderRadius = "200px";
+            elements[elements.length - i].style.boxShadow =
+              "0px 0px 5px 1px #FFFFFF";
+            return;
+          }
+        }
+      }
+    }
+  } else {
+    if (randomNumber === 0) {
+      for (let i = 0; i < elements.length; i++) {
+        if (i === 0) {
+          elements[elements.length - 1].style.position = "absolute";
+
+          elements[elements.length - 1].style.backgroundColor = "black";
           let randomHeight = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
           let randomWidth = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
           elements[elements.length - 1].style.width = `${randomWidth}px`;
@@ -121,7 +178,7 @@ function draw(e) {
           elements[elements.length - i].style.top = `${y -
             randomHeight / 2 -
             30}px`;
-          elements[elements.length - i].style.backgroundColor = "white";
+          elements[elements.length - i].style.backgroundColor = "black";
           elements[elements.length - i].style.width = `${randomWidth}px`;
           elements[elements.length - i].style.height = `${randomHeight}px`;
           elements[elements.length - i].style.margin = "1px";
@@ -129,6 +186,50 @@ function draw(e) {
           elements[elements.length - i].style.boxShadow =
             "0px 0px 5px 1px #FFFFFF";
           return;
+        }
+      }
+    }
+    if (randomNumber === 1) {
+      {
+        for (let i = 0; i < elements.length; i++) {
+          if (i === 0) {
+            elements[elements.length - 1].style.position = "absolute";
+
+            elements[elements.length - 1].style.backgroundColor = "white";
+            let randomHeight = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
+            let randomWidth = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
+            elements[elements.length - 1].style.width = `${randomWidth}px`;
+            elements[elements.length - 1].style.height = `${randomHeight}px`;
+            elements[elements.length - 1].style.left = `${x -
+              randomWidth / 2 -
+              30}px`;
+            elements[elements.length - 1].style.top = `${y -
+              randomHeight / 2 -
+              30}px`;
+            elements[elements.length - 1].style.margin = "1px";
+            elements[elements.length - 1].style.borderRadius = "200px";
+            elements[elements.length - 1].style.boxShadow =
+              "0px 0px 5px 1px #FFFFFF";
+          }
+          if (i > 0) {
+            elements[i].style.position = "absolute";
+            let randomHeight = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
+            let randomWidth = Math.floor(Math.random() * (50 - 12.5)) + 12.5;
+            elements[elements.length - i].style.left = `${x -
+              randomWidth / 2 -
+              30}px`;
+            elements[elements.length - i].style.top = `${y -
+              randomHeight / 2 -
+              30}px`;
+            elements[elements.length - i].style.backgroundColor = "white";
+            elements[elements.length - i].style.width = `${randomWidth}px`;
+            elements[elements.length - i].style.height = `${randomHeight}px`;
+            elements[elements.length - i].style.margin = "1px";
+            elements[elements.length - i].style.borderRadius = "200px";
+            elements[elements.length - i].style.boxShadow =
+              "0px 0px 5px 1px #FFFFFF";
+            return;
+          }
         }
       }
     }
