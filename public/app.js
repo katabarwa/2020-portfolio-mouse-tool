@@ -1,44 +1,37 @@
 let body = document.querySelector("body");
-// body.style.backgroundColor = "black";
-// let divCanvas = document.getElementById("canvas");
-// body.style.backgroundColor = "rgba(255,0,0,0.5)"; //
-// body.style.height = "900px";
-// divCanvas.style.width = "width";
-// body.style.zIndex = 10;
-// divCanvas.style.top = "0";
-// // body.style.display = "flex";
-// // body.style.flexWrap = "wrap";
-// console.log(divCanvas);
 
 body.addEventListener("mousemove", draw);
 body.addEventListener("click", clear);
-let hasBeenScrolled = false;
-body.onscroll = function scrolling() {
+let beenScrolled = false;
+let scrolledMoreThanOnce = false;
+
+function Scrolled() {
   let scrollYDistance = window.scrollY;
+  if (scrollYDistance > 0) {
+    beenScrolled = true;
+    console.log("beenScrolled", beenScrolled);
+  } else {
+    beenScrolled = false;
+    console.log("beenScrolled2", beenScrolled);
+  }
+}
 
-  // let y = e.clientY;
-  // console.log("befo", y);
-  console.log("scroll", scrollYDistance);
-  let elements = document.getElementsByClassName("frame");
-  let elementsArray = [...elements];
-  // console.log("elementsarray", elementsArray);
-  elementsArray.forEach(element => {
-    // console.log(element);
-
-    element.style.transform = `translate(0px,${scrollYDistance}px)`;
-    // console.log(y);
-  });
-  console.log("hasbeenscrolled1", hasBeenScrolled);
-
-  return (hasBeenScrolled = true);
-  console.log("hasbeenscrolled", hasBeenScrolled);
-
-  // if (window.scrollY) {
-  //   window.scroll(0, 0); // reset the scroll position to the top left of the document.
-  // }
-};
-// body.addEventListener("scroll", scrolling);
-// document.getElementById("canvas").addEventListener("onmouseup", clickBody);
+function translateOnlyOnFirstScroll() {
+  if (beenScrolled === false) {
+    body.onscroll = function scrolling() {
+      let scrollYDistance = window.scrollY;
+      console.log("scroll", scrollYDistance);
+      let elements = document.getElementsByClassName("frame");
+      let elementsArray = [...elements];
+      {
+        elementsArray.forEach(element => {
+          element.style.transform = `translate(0px,${scrollYDistance}px)`;
+        });
+      }
+    };
+  }
+  return (beenScrolled = true);
+}
 
 function draw(e) {
   let scrollYDistance = window.scrollY;
@@ -48,13 +41,9 @@ function draw(e) {
   frame.setAttribute("class", "frame");
   document.body.appendChild(frame);
   let elements = document.getElementsByClassName("frame");
-  // console.log("elements-array", elements);
-  // console.log("elements lenght", elements.length);
-
   let randomNumber = Math.floor(Math.random() * 2);
-  console.log("hasbeenscrolled2", hasBeenScrolled);
 
-  if (hasBeenScrolled === true) {
+  if (beenScrolled === true) {
     if (randomNumber === 0) {
       for (let i = 0; i < elements.length; i++) {
         if (i === 0) {
@@ -76,6 +65,7 @@ function draw(e) {
           elements[elements.length - 1].style.borderRadius = "200px";
           elements[elements.length - 1].style.boxShadow =
             "0px 0px 5px 1px #FFFFFF";
+          return;
         }
         if (i > 0) {
           elements[i].style.position = "absolute";
@@ -95,10 +85,9 @@ function draw(e) {
           elements[elements.length - i].style.borderRadius = "200px";
           elements[elements.length - i].style.boxShadow =
             "0px 0px 5px 1px #FFFFFF";
-          console.log("hasbeenscrolled3", hasBeenScrolled);
+          return;
         }
       }
-      return (hasBeenScrolled = false);
     }
     if (randomNumber === 1) {
       {
@@ -122,6 +111,7 @@ function draw(e) {
             elements[elements.length - 1].style.borderRadius = "200px";
             elements[elements.length - 1].style.boxShadow =
               "0px 0px 5px 1px #FFFFFF";
+            return;
           }
           if (i > 0) {
             elements[i].style.position = "absolute";
@@ -146,6 +136,7 @@ function draw(e) {
         }
       }
     }
+    return (isItScrolling = false);
   } else {
     if (randomNumber === 0) {
       for (let i = 0; i < elements.length; i++) {
@@ -167,6 +158,7 @@ function draw(e) {
           elements[elements.length - 1].style.borderRadius = "200px";
           elements[elements.length - 1].style.boxShadow =
             "0px 0px 5px 1px #FFFFFF";
+          return;
         }
         if (i > 0) {
           elements[i].style.position = "absolute";
@@ -210,6 +202,7 @@ function draw(e) {
             elements[elements.length - 1].style.borderRadius = "200px";
             elements[elements.length - 1].style.boxShadow =
               "0px 0px 5px 1px #FFFFFF";
+            return;
           }
           if (i > 0) {
             elements[i].style.position = "absolute";
@@ -237,76 +230,14 @@ function draw(e) {
 }
 
 function clear() {
-  // let elements = document.getElementsByClassName("frame");
-  // console.log("elements in clear", elements);
-  // elements.forEach(elements.element, element => console.log(element));
   let elements = document.getElementsByClassName("frame");
   console.log("elements in clear", [...elements]);
   elementsArray = [...elements];
   elementsArray.forEach(element => {
     element.remove();
   });
-
-  // for (let i = 0; i < elements.length; i++) {
-  // elements[0].remove();
-  // console.log("element i", i, elements[i]);
-  // }
 }
-// console.log("elements in clear", elements);
-// elements.forEach(element => {
-//   console.log("element", element);
-//
-// }
-// var divs = document.getElementsByTagName('div');
-// for (var i = 0; i < divs.length; i++) {
-//     divs[i].addEventListener('click', capture, true);
-//     divs[i].addEventListener('click', bubble, false);
-// }
 
-// function draw(e) {
-//   console.log(e);
-
-//   console.log("elements", elements);
-
-//   let randomNumber = Math.floor(Math.random() * 2);
-//   console.log(randomNumber);
-
-//   if (randomNumber === 0) {
-//     let x = e.clientX;
-//     let y = e.clientY;
-//     elements[i].style.position = "absolute";
-//     elements[i].style.left = `${x}px`;
-//     elements[i].style.top = `${y}px`;
-//     elements[i].style.backgroundColor = "black";
-//     elements[i].style.width = `${Math.floor(Math.random() * (200 - 50)) +
-//       50}px`;
-//     elements[i].style.height = `${Math.floor(Math.random() * (200 - 50)) +
-//       50}px`;
-//     elements[i].style.margin = "1px";
-//     elements[i].style.borderRadius = "200px";
-//     elements[i].style.boxShadow = "0px 0px 5px 1px #FFFFFF";
-//   }
-//   if (randomNumber === 1) {
-//     let x = e.clientX;
-//     let y = e.clientY;
-//     elements[i].style.position = "absolute";
-//     elements[i].style.left = `${x}px`;
-//     elements[i].style.top = `${y}px`;
-//     elements[i].style.backgroundColor = "white";
-//     elements[i].style.width = `${Math.floor(Math.random() * (200 - 50)) +
-//       50}px`;
-//     elements[i].style.height = `${Math.floor(Math.random() * (200 - 50)) +
-//       50}px`;
-//     elements[i].style.borderRadius = "200px";
-//     elements[i].style.margin = "1px";
-//     elements[i].style.boxShadow = "0px 0px 5px 1px #FFFFFF";
-//   }
-// }
-
-// setInterval(() => {
-//   draw();
-// }, 400);
-
-// setTimeout(() => {
-//   draw();
-// }, 400);
+setInterval(() => {
+  Scrolled();
+}, 40);
